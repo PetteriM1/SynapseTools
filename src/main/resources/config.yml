@@ -1,0 +1,18 @@
+# Config for SynapseTools 1.0 by PetteriM1
+# Do not use spaces in server descriptions!
+
+# Enable /transfer (alias /srv) command for Synapse
+transferCommandEnabled: true
+
+# Enable /hub and /lobby commands for Synapse
+hubCommandEnabled: true
+
+# Hide all Synapse messages in chat
+# This may hide some info form console also
+hideSynapseMessages: true
+
+# List of lobby servers for this server
+# You can set different lobby servers for some servers by making these different for some servers
+lobbiesForThisServer:
+  - "ExampleLobby1"
+  - "ExampleLobby2"
