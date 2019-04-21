@@ -16,3 +16,7 @@ hideSynapseMessages: true
 lobbiesForThisServer:
   - "ExampleLobby1"
   - "ExampleLobby2"
+
+# Enable task to send food data for players on every tick to fix glitching food bar
+# May not be a problem on all servers
+enableFoodBarHack: true

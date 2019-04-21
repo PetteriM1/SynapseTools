@@ -1,5 +1,7 @@
 package synapsetools;
 
+import cn.nukkit.Player;
+import cn.nukkit.Server;
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.event.EventHandler;
@@ -21,6 +23,19 @@ public class Main extends PluginBase implements Listener {
         getServer().getPluginManager().registerEvents(this, this);
         saveDefaultConfig();
         c = getConfig();
+
+        if (c.getBoolean("enableFoodBarHack")) {
+            getServer().getScheduler().scheduleRepeatingTask(new cn.nukkit.scheduler.Task() {
+                @Override
+                public void onRun(int i) {
+                    try {
+                        for (Player p : Server.getInstance().getOnlinePlayers().values()) {
+                            p.getFoodData().setLevel(p.getFoodData().getLevel());
+                        }
+                    } catch (Exception ignore) {}
+                }
+            }, 1, true);
+        }
     }
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -42,7 +57,7 @@ public class Main extends PluginBase implements Listener {
                 if (c.getBoolean("hubCommandEnabled")) {
                     List<String> l = c.getStringList("lobbiesForThisServer");
                     if (l.size() == 0) {
-                        p.sendMessage("\u00A7cThis feature isn't configured correctly, please contact administrator");
+                        p.sendMessage("\u00A7cThere is no lobbies set for this server");
                         return true;
                     }
                     if (!l.contains(p.getSynapseEntry().getServerDescription())) {
