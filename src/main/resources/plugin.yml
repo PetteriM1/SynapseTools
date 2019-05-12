@@ -5,6 +5,7 @@ api: ["1.0.0"]
 author: PetteriM1
 
 depend: ["SynapseAPI"]
+loadbefore: ["TransferCommand"]
 
 commands:
   transfer:
