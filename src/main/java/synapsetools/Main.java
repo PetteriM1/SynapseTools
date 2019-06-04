@@ -30,7 +30,7 @@ public class Main extends PluginBase implements Listener {
                 public void onRun(int i) {
                     try {
                         for (Player p : Server.getInstance().getOnlinePlayers().values()) {
-                            p.getFoodData().setLevel(p.getFoodData().getLevel());
+                            p.getFoodData().sendFoodLevel();
                         }
                     } catch (Exception ignore) {}
                 }
@@ -44,14 +44,18 @@ public class Main extends PluginBase implements Listener {
             if (command.getName().equalsIgnoreCase("transfer")) {
                 if (c.getBoolean("transferCommandEnabled")) {
                     if (args.length > 0) {
-                        if (p.getSynapseEntry().getServerDescription().equalsIgnoreCase(args[0])) {
+                        if (p.getSynapseEntry().getServerDescription().equals(args[0])) {
                             p.sendMessage("\u00A7cYou are already on this server");
                         } else {
-                            p.transferByDescription(args[0]);
+                            if (!p.transferByDescription(args[0])) {
+                                p.sendMessage("\u00A7cUnknown server");
+                            }
                         }
                     } else {
                         p.sendMessage("Usage: /transfer <target>");
                     }
+                } else {
+                    return false;
                 }
             } else if (command.getName().equalsIgnoreCase("hub") || command.getName().equalsIgnoreCase("lobby")) {
                 if (c.getBoolean("hubCommandEnabled")) {
@@ -65,9 +69,12 @@ public class Main extends PluginBase implements Listener {
                     } else {
                         p.sendMessage("\u00A7cYou are already on a lobby server");
                     }
+                } else {
+                    return false;
                 }
             }
         }
+
         return true;
     }
 
