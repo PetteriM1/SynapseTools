@@ -1,4 +1,4 @@
-# Config for SynapseTools 1.0.2 by PetteriM1
+# Config for SynapseTools 1.0.3 by PetteriM1
 # Do not use spaces in server descriptions!
 
 # Enable /transfer (alias /srv) command for Synapse
@@ -20,3 +20,7 @@ lobbiesForThisServer:
 # Enable task to send food data for players on every tick to fix glitching food bar
 # May not be a problem on all servers
 enableFoodBarHack: true
+
+# Make client to remove effects when switching server
+removeEffectsOnTransfer: true
+
